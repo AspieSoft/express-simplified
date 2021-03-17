@@ -231,29 +231,28 @@ function start(port = 3000, pageHandler){
     next();
   });
 
-  app.post((req, res, next) => {
-    if(varType(req.data) !== 'object'){
+  app.post('*', (req, res, next) => {
+    if(!req.data || varType(req.data) !== 'object'){
       req.data = {};
     }
     if(varType(req.body) === 'object'){
-      Object.assign(clean(req.body), req.data);
+      req.data = Object.assign(clean(req.body), req.data);
     }
     next();
   });
 
-  app.get((req, res, next) => {
-    if(varType(req.data) !== 'object'){
+  app.get('*', (req, res, next) => {
+    if(!req.data || varType(req.data) !== 'object'){
       req.data = {};
     }
     if(varType(req.query) === 'object'){
-      Object.assign(clean(req.query), req.data);
+      req.data = Object.assign(clean(req.query), req.data);
     }
     next();
   });
 
   // handle requests
   app.req = function(){
-    console.log(...arguments);
     app.post(...arguments);
     app.get(...arguments);
   };

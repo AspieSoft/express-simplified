@@ -11,7 +11,9 @@
 [![paypal](https://img.shields.io/badge/buy%20me%20a%20coffee-paypal-blue)](https://buymeacoffee.aspiesoft.com/)
 
 A simple module that runs express with a common setup for a basic website.
+
 Develop your express sites faster.
+
 Useful if you tend to make a lot of apis or web apps that run on express.
 
 - Also sets "trust proxy" to true for reverse proxies like nginx.
