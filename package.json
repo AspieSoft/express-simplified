@@ -1,0 +1,39 @@
+{
+  "name": "@aspiesoft/express-simplified",
+  "version": "1.0.0",
+  "description": "A simple module that runs express with a common setup for a basic website.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=12.0"
+  },
+  "author": "AspieSoft",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aspiesoft/express-simplified.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "simplified",
+    "server"
+  ],
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-force-ssl": "^0.3.2",
+    "express-rate-limit": "^5.2.6",
+    "express-timeout-handler": "^2.2.0",
+    "geoip-country": "^4.0.60",
+    "helmet": "^4.4.1",
+    "isbot-fast": "^1.2.0",
+    "validator": "^13.5.2"
+  },
+  "optionalDependencies": {
+    "@aspiesoft/regve": "^0.11.3",
+    "forever": "^3.0.4",
+    "fs-extra": "^9.1.0"
+  }
+}
