@@ -451,6 +451,7 @@ module.exports = (() => {
 
   exports.server = server;
   exports.express = express;
+  exports.regve = regve;
   exports.helmet = helmet;
   exports.validator = validator;
   exports.geoIP = geoIP;
