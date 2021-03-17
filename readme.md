@@ -14,21 +14,21 @@ A simple module that runs express with a common setup for a basic website.
 Develop your express sites faster.
 Useful if you tend to make a lot of apis or web apps that run on express.
 
-Also sets "trust proxy" to true for reverse proxies like nginx.
-Includes the ability to add any view engine you choose.
-Includes the optional default view engine (@aspiesoft/regve) pre setup if installed as a dependency.
-Runs the helmet module.
-Adds easy access to validator, and a function to sanitize variable types.
-Combines req.body and req.query into a single req.data (post data has priority over get data).
-In production (process.env.NODE_ENV === 'production'), forces ssl and verifies if the hostname is a FQDN with validator.
-Checks if the request is from localhost.
-Gets the geo IP country code with the geoip-country module.
-Runs a simple check to detect bots using the isbot-fast module (could be useful for SEO development).
-Simplifies the req.url to remove extra / at end, and removes query vars from the url (still accessible with req.query).
-Only allows GET and POST methods with "Access-Control-Allow-Methods".
-Limits the request size to 1mb.
-Adds a /ping url that runs before the view engine (simply returns "pong!") (useful for quickly checking if the server is online).
-You still have full access to the express module.
+- Also sets "trust proxy" to true for reverse proxies like nginx.
+- Includes the ability to add any view engine you choose.
+- Includes the optional default view engine (@aspiesoft/regve) pre setup if installed as a dependency.
+- Runs the helmet module.
+- Adds easy access to validator, and a function to sanitize variable types.
+- Combines req.body and req.query into a single req.data (post data has priority over get data).
+- In production (process.env.NODE_ENV === 'production'), forces ssl and verifies if the hostname is a FQDN with validator.
+- Checks if the request is from localhost.
+- Gets the geo IP country code with the geoip-country module.
+- Runs a simple check to detect bots using the isbot-fast module (could be useful for SEO development).
+- Simplifies the req.url to remove extra / at end, and removes query vars from the url (still accessible with req.query).
+- Only allows GET and POST methods with "Access-Control-Allow-Methods".
+- Limits the request size to 1mb.
+- Adds a /ping url that runs before the view engine (simply returns "pong!") (useful for quickly checking if the server is online).
+- You still have full access to the express module.
 
 ## Installation
 
@@ -41,8 +41,9 @@ npm install @aspiesoft/express-simplified
 ```js
 const server = require('@aspiesoft/express-simplified');
 
-// optional
+/* Start Optional Methods */
 
+// set static path (optional)
 server.static('/cdn', path.join(__dirname, 'public'));
 
 // set view engine (optional)
@@ -93,6 +94,8 @@ server.pages({
     // express page callback here
   },
 });
+
+/* End Optional Methods */
 
 // start server
 const port = 3000;
