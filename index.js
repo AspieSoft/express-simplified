@@ -1,4 +1,4 @@
-//In God We Trust
+// In God We Trust
 
 const {join} = require('path');
 const crypto = require('crypto');
