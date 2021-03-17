@@ -1,3 +1,5 @@
+//In God We Trust
+
 const {join} = require('path');
 const crypto = require('crypto');
 const http = require('http');
