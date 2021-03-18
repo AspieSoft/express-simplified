@@ -15,7 +15,7 @@ const geoIP = require('geoip-country');
 const isBot = require('isbot-fast');
 const forceSSL = require('express-force-ssl');
 
-const root = require.main.path.toString();
+const root = clean(require.main.filename || require.main.path || '');
 
 const regve = (() => {
   try{
