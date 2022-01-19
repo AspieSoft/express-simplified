@@ -133,7 +133,7 @@ function start(port = 3000, pageHandler){
   isBot.extend(['validator']);
 
   // firewall
-  // app.use(helmet.hsts());
+  app.use(helmet.hsts());
 
   const limiter = rateLimit({
     windowMs: 10 * 60000, // 10 minutes
@@ -168,6 +168,7 @@ function start(port = 3000, pageHandler){
       static = '/cdn';
     }
   }
+
 
   app.use((req, res, next) => {
     req.root = root;
@@ -238,8 +239,36 @@ function start(port = 3000, pageHandler){
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
+    if(!res.locals){
+      res.locals = {};
+    }
+    res.locals.nonce = crypto.randomBytes(32).toString('hex');
+
+    helmet.contentSecurityPolicy({
+      useDefaults: true,
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", `'nonce-${res.locals.nonce}'`],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: true,
+      },
+      reportOnly: false,
+    })(req, res, next);
+
     next();
   });
+
+  app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", `'nonce-${res.locals.nonce}'`],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+    })
+  );
+
 
   app.post('*', (req, res, next) => {
     if(!req.data || varType(req.data) !== 'object'){
