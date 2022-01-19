@@ -241,7 +241,7 @@ function start(port = 3000, pageHandler){
 
     // res.setHeader('Access-Control-Allow-Origin', '*');
 
-    if(!res.locals){
+    /* if(!res.locals){
       res.locals = {};
     }
     res.locals.nonce = crypto.randomBytes(32).toString('hex');
@@ -255,12 +255,12 @@ function start(port = 3000, pageHandler){
         upgradeInsecureRequests: [],
       },
       reportOnly: false,
-    })(req, res, next);
+    })(req, res, next); */
 
     next();
   });
 
-  /* app.use(helmet.contentSecurityPolicy({
+  app.use(helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
       defaultSrc: ["'self'"],
@@ -269,7 +269,7 @@ function start(port = 3000, pageHandler){
       upgradeInsecureRequests: [],
     },
     reportOnly: false,
-  })); */
+  }));
 
 
   app.post('*', (req, res, next) => {

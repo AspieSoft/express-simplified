@@ -1,6 +1,6 @@
 {
   "name": "@aspiesoft/express-simplified",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A simple module that runs express with a common setup for a basic website.",
   "main": "index.js",
   "engines": {
