@@ -258,17 +258,6 @@ function start(port = 3000, pageHandler){
     next();
   });
 
-  app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", `'nonce-${res.locals.nonce}'`],
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: [],
-      },
-    })
-  );
-
 
   app.post('*', (req, res, next) => {
     if(!req.data || varType(req.data) !== 'object'){
