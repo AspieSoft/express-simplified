@@ -239,6 +239,8 @@ function start(port = 3000, pageHandler){
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
+    // res.setHeader('Access-Control-Allow-Origin', '*');
+
     if(!res.locals){
       res.locals = {};
     }
@@ -250,13 +252,24 @@ function start(port = 3000, pageHandler){
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", `'nonce-${res.locals.nonce}'`],
         objectSrc: ["'none'"],
-        upgradeInsecureRequests: true,
+        upgradeInsecureRequests: [],
       },
       reportOnly: false,
     })(req, res, next);
 
     next();
   });
+
+  /* app.use(helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+    reportOnly: false,
+  })); */
 
 
   app.post('*', (req, res, next) => {
