@@ -74,7 +74,9 @@ function start(port = 3000, pageHandler){
 
   app.set('trust proxy', true);
 
-  app.use(helmet());
+  app.use(helmet({
+    contentSecurityPolicy: false,
+  }));
 
   app.use(timeout.handler({
     timeout: 5000,
@@ -133,8 +135,6 @@ function start(port = 3000, pageHandler){
   isBot.extend(['validator']);
 
   // firewall
-  app.use(helmet.hsts());
-
   const limiter = rateLimit({
     windowMs: 10 * 60000, // 10 minutes
     max: 5000,
@@ -239,39 +239,8 @@ function start(port = 3000, pageHandler){
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    // res.setHeader('Access-Control-Allow-Origin', '*');
-
-    /* if(!res.locals){
-      res.locals = {};
-    }
-    res.locals.nonce = crypto.randomBytes(32).toString('hex');
-
-    helmet.contentSecurityPolicy({
-      useDefaults: true,
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", `'nonce-${res.locals.nonce}'`],
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: [],
-      },
-      reportOnly: false,
-    })(req, res, next); */
-
     next();
   });
-
-  app.use(helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      frameSrc: ["'self'", "'unsafe-inline'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: [],
-    },
-    reportOnly: false,
-  }));
 
 
   app.post('*', (req, res, next) => {
