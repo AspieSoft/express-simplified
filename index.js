@@ -264,11 +264,11 @@ function start(port = 3000, pageHandler){
     useDefaults: true,
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
     },
-    reportOnly: false,
+    reportOnly: true,
   }));
 
 
