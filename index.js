@@ -133,7 +133,7 @@ function start(port = 3000, pageHandler){
   isBot.extend(['validator']);
 
   // firewall
-  app.use(helmet.hsts());
+  // app.use(helmet.hsts());
 
   const limiter = rateLimit({
     windowMs: 10 * 60000, // 10 minutes
