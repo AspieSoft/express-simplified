@@ -1,6 +1,6 @@
 {
   "name": "@aspiesoft/express-simplified",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A simple module that runs express with a common setup for a basic website.",
   "main": "index.js",
   "engines": {
@@ -33,7 +33,7 @@
   },
   "peerDependencies": {
     "@aspiesoft/inputmd": "^0.1.1",
-    "@aspiesoft/regve": "^1.0.0",
+    "@aspiesoft/regve": "^1.1.1",
     "fs-extra": "^9.1.0"
   }
 }
