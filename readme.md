@@ -1,5 +1,9 @@
 # Express Simplified
 
+> Depreciated: Please use [basic-site](https://github.com/AspieSoft/basic-site) instead.
+>
+> [@aspiesoft/express-simplified](https://www.npmjs.com/package/express-simplified) will likely remain on npm for older versions, but the nonscoped name [express-simplified](https://www.npmjs.com/package/express-simplified) was not well chosen, and may be removed in the future.
+
 ![npm](https://img.shields.io/npm/v/express-simplified)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/express-simplified)
 ![GitHub top language](https://img.shields.io/github/languages/top/aspiesoft/express-simplified)
@@ -37,8 +41,8 @@ Useful if you tend to make a lot of apis or web apps that run on express.
 ```shell script
 npm install @aspiesoft/express-simplified
 
-# or with optional peer dependencies
-npm install @aspiesoft/express-simplified --save-optional
+# or without optional dependencies
+npm install @aspiesoft/express-simplified --no-optional
 ```
 
 ## Setup
@@ -46,12 +50,26 @@ npm install @aspiesoft/express-simplified --save-optional
 ```js
 const server = require('@aspiesoft/express-simplified');
 
-/* Start Optional Methods */
+const {join} = require('path');
 
-// set static path (optional)
-server.static('/cdn', path.join(__dirname, 'public'));
+// set static path (optional) (default: public)
+server.static('/cdn', join(__dirname, 'public'));
 
-// set view engine (optional)
+// set view engine (optional) (default: regve with below options)
+server.viewEngine('regve' || 'inputmd', {
+  template: 'layout',
+  dir: join(__dirname, 'views'),
+  type: 'html',
+  cache: '1D',
+});
+// regve and inputmd are view engines made by AspieSoft
+
+// regve is similar to handlebars, but with more features and less crashing
+
+// inputmd simply adds a markdown like syntax to html
+// it allows basic inputs similar to handlebars, and allows importing files (but has no functions or if statements)
+
+// set any other view engine (optional)
 server.viewEngine(function(app){
   // setup view engine
   app.engine('html', regve({
@@ -62,15 +80,8 @@ server.viewEngine(function(app){
   }));
 });
 
-// send in an object to set regve options instead (optional)
-server.viewEngine({
-  template: 'layout',
-  dir: join(__dirname, 'views'),
-  type: 'html',
-  cache: '1D',
-});
 
-// set pages (optional)
+// set pages
 server.pages(function(app){
   app.use('/url', (req, res, next) => {
     // express page callback here

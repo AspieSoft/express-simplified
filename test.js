@@ -8,6 +8,8 @@ server.viewEngine({
   cache: '1D',
 });
 
+server.static('/cdn', join(__dirname, 'public'));
+
 
 server.pages(function(app) {
 
@@ -18,6 +20,7 @@ server.pages(function(app) {
 });
 
 server(3000);
+
 
 setTimeout(() => {
   process.exit(0);
